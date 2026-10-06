@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-white font-body antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(91, 108, 255, 0.45);
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #06070d; }
+::-webkit-scrollbar-thumb { background: #262b45; border-radius: 8px; }
+
+/* ---------- glass helpers ---------- */
+.glass {
+  background: linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.glass-deep {
+  background: linear-gradient(160deg, rgba(16,19,36,0.85), rgba(9,11,22,0.92));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #ffffff 10%, #9db4ff 45%, #7ef0d4 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- glow orbs behind sections ---------- */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ---------- buttons ---------- */
+.btn-primary {
+  @apply relative inline-flex items-center justify-center gap-2 rounded-full
+    bg-gradient-to-r from-brand-500 to-brand-600 px-7 py-3.5
+    font-display font-semibold text-white shadow-glow-brand
+    transition-transform duration-300 ease-out
+    active:scale-95;
+}
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); }
+
+.btn-ghost {
+  @apply relative inline-flex items-center justify-center gap-2 rounded-full
+    glass px-7 py-3.5 font-display font-semibold text-white/90
+    transition-transform duration-300 ease-out active:scale-95;
+}
+.btn-ghost:hover { transform: translateY(-2px); }
+
+/* ---------- 3D feature cards ---------- */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-inner {
+  transform: translateZ(34px);
+}
+.tilt-glare {
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255,255,255,0.14), transparent 45%);
+}
+
+/* ---------- CSS phone frame (screenshots section) ---------- */
+.phone-frame {
+  position: relative;
+  border-radius: 2.6rem;
+  padding: 10px;
+  background:
+    linear-gradient(150deg, #3a415c 0%, #14172a 30%, #0a0c17 60%, #232a44 100%);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.25),
+    inset 0 -1px 2px rgba(0,0,0,0.8),
+    0 30px 80px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.06);
+}
+.phone-screen {
+  border-radius: 2rem;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 9 / 19.2;
+  background: #080a14;
+}
+.phone-notch {
+  position: absolute;
+  top: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 34%; height: 22px;
+  background: #000;
+  border-radius: 999px;
+  z-index: 30;
+}
+.phone-glare {
+  position: absolute; inset: 0; z-index: 40;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.02) 55%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ---------- section labels ---------- */
+.eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full glass px-4 py-1.5
+    text-xs font-semibold uppercase tracking-[0.22em] text-brand-300;
+}
+
+/* ---------- reveal defaults ---------- */
+.will-reveal {
+  opacity: 0;
+}
+
+/* ---------- marquee ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track { animation: none; }
+}
